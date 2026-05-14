@@ -1,0 +1,60 @@
+Mods: {
+	MobHPSlider: {
+		Configs: {
+			MobHPConfig: {
+				DisplayName: Mob HP Slider
+
+				Headers: {
+					HP_Multipliers: HP Multipliers
+					Affected_Mobs: Which Mobs Are Affected
+					Safety: Safety Options
+				}
+
+				HPPercent: {
+					Label: Regular Mob HP %
+					Tooltip:
+						'''
+						Scales the health of all regular enemies as a percentage of their default value.
+						10  = 10% health (super easy)
+						100 = normal health
+						500 = 500% health (brutal)
+						'''
+				}
+
+				BossHPPercent: {
+					Label: Boss HP %
+					Tooltip:
+						'''
+						Scales boss health independently of regular mobs.
+						Only applies when "Affect Bosses" is enabled.
+						100 = normal boss HP
+						'''
+				}
+
+				AffectBosses: {
+					Label: Affect Bosses
+					Tooltip: When enabled, boss HP is scaled using the Boss HP % slider above.
+				}
+
+				AffectTownNPCs: {
+					Label: Affect Town NPCs
+					Tooltip:
+						'''
+						When enabled, town NPC HP is also scaled by the regular mob slider.
+						Mostly relevant for Old One's Army defenders.
+						'''
+				}
+
+				MinHP: {
+					Label: Minimum HP Floor
+					Tooltip:
+						'''
+						No mob will ever be scaled below this many HP.
+						Prevents enemies from being reduced to 0 or near-0 HP by the config.
+						Set to 1 to effectively disable the floor.
+						'''
+				}
+			}
+		}
+	}
+}
