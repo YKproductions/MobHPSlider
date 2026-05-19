@@ -1,0 +1,10 @@
+# Build Folders
+bin/
+obj/
+
+# Developer settings / IDE configurations
+.vs/
+.vscode/
+Properties/launchSettings.json
+*.user
+*.suo

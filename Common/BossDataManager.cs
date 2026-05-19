@@ -103,7 +103,7 @@ namespace MobHPSlider.Common
         public static void Initialize()
         {
             // Replace this URL with the 'Raw' link to your bossdatadp.cs file on GitHub
-            string url = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/bossdatadp.cs";
+            string url = "https://raw.githubusercontent.com/YKproductions/MobHPSlider/refs/heads/main/Data/bossdatadp.cs";
             LoadRemoteBossData(url);
         }
     }
