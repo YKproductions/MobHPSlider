@@ -5,6 +5,9 @@ obj/
 # Developer settings / IDE configurations
 .vs/
 .vscode/
-Properties/launchSettings.json
+Properties/
 *.user
 *.suo
+
+# Steam Workshop
+icon_workshop.png
