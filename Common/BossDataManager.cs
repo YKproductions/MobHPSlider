@@ -14,6 +14,22 @@ namespace MobHPSlider.Common
     {
         public static Dictionary<string, float> BossHPOverrides = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
 
+        private static void LogInfo(string message)
+        {
+            if (MobHPSlider.Instance != null && MobHPSlider.Instance.Logger != null)
+                MobHPSlider.Instance.Logger.Info(message);
+            else
+                Console.WriteLine(message);
+        }
+
+        private static void LogError(string message)
+        {
+            if (MobHPSlider.Instance != null && MobHPSlider.Instance.Logger != null)
+                MobHPSlider.Instance.Logger.Error(message);
+            else
+                Console.Error.WriteLine(message);
+        }
+
         public static void RegisterBossOverride(string bossName, float multiplier)
         {
             if (BossHPOverrides.ContainsKey(bossName))
@@ -21,7 +37,7 @@ namespace MobHPSlider.Common
             else
                 BossHPOverrides.Add(bossName, multiplier);
             
-            ModContent.GetInstance<MobHPSlider>().Logger.Info($"[BossDataManager] Registered override: {bossName} x{multiplier}");
+            LogInfo($"[BossDataManager] Registered override: {bossName} x{multiplier}");
         }
 
         public static string FetchRemoteData(string rawUrl)
@@ -53,7 +69,7 @@ namespace MobHPSlider.Common
             
             if (csCode.StartsWith("Error"))
             {
-                ModContent.GetInstance<MobHPSlider>().Logger.Error($"[BossDataManager] Download failed: {csCode}");
+                LogError($"[BossDataManager] Download failed: {csCode}");
                 return;
             }
             
@@ -78,7 +94,7 @@ namespace MobHPSlider.Common
                     string errLog = "Compilation errors:\n";
                     foreach (CompilerError error in results.Errors)
                         errLog += $"{error.ErrorText}\n";
-                    ModContent.GetInstance<MobHPSlider>().Logger.Error($"[BossDataManager] {errLog}");
+                    LogError($"[BossDataManager] {errLog}");
                     return;
                 }
                 
@@ -90,30 +106,39 @@ namespace MobHPSlider.Common
                     if (method != null)
                     {
                         method.Invoke(null, null);
-                        ModContent.GetInstance<MobHPSlider>().Logger.Info("[BossDataManager] Remote boss data initialized successfully.");
+                        LogInfo("[BossDataManager] Remote boss data initialized successfully.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                ModContent.GetInstance<MobHPSlider>().Logger.Error($"[BossDataManager] Execution error: {ex.Message}");
+                LogError($"[BossDataManager] Execution error: {ex.Message}");
             }
         }
 
         public static void Initialize()
         {
+            // 1. Try to load local boss data, wrapped safely so it cannot halt execution
             try
             {
                 RemoteBossConfig.Initialize();
-                ModContent.GetInstance<MobHPSlider>().Logger.Info("[BossDataManager] Local boss data initialized.");
+                LogInfo("[BossDataManager] Local boss data initialized.");
             }
             catch (Exception ex)
             {
-                ModContent.GetInstance<MobHPSlider>().Logger.Error($"[BossDataManager] Failed to initialize local boss data: {ex.Message}");
+                LogError($"[BossDataManager] Failed to initialize local boss data: {ex.Message}");
             }
 
-            string url = "https://raw.githubusercontent.com/YKproductions/MobHPSlider/refs/heads/main/Data/bossdatadp.cs";
-            LoadRemoteBossData(url);
+            // 2. Fetch and load remote boss data, wrapped in its own independent block so it runs no matter what
+            try
+            {
+                string url = "https://raw.githubusercontent.com/YKproductions/MobHPSlider/refs/heads/main/Data/bossdatadp.cs";
+                LoadRemoteBossData(url);
+            }
+            catch (Exception ex)
+            {
+                LogError($"[BossDataManager] Failed to process remote boss data: {ex.Message}");
+            }
         }
     }
 }
