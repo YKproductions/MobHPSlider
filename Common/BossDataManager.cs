@@ -82,8 +82,7 @@ namespace MobHPSlider.Common
                 parameters.ReferencedAssemblies.Add("System.Core.dll");
                 parameters.ReferencedAssemblies.Add(typeof(Main).Assembly.Location);
                 parameters.ReferencedAssemblies.Add(typeof(Mod).Assembly.Location);
-                parameters.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
-                
+
                 parameters.GenerateInMemory = true;
                 parameters.GenerateExecutable = false;
                 
@@ -118,18 +117,6 @@ namespace MobHPSlider.Common
 
         public static void Initialize()
         {
-            // 1. Try to load local boss data, wrapped safely so it cannot halt execution
-            try
-            {
-                RemoteBossConfig.Initialize();
-                LogInfo("[BossDataManager] Local boss data initialized.");
-            }
-            catch (Exception ex)
-            {
-                LogError($"[BossDataManager] Failed to initialize local boss data: {ex.Message}");
-            }
-
-            // 2. Fetch and load remote boss data, wrapped in its own independent block so it runs no matter what
             try
             {
                 string url = "https://raw.githubusercontent.com/YKproductions/MobHPSlider/refs/heads/main/Data/bossdatadp.cs";

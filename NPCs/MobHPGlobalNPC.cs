@@ -1,4 +1,6 @@
 using Terraria;
+using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace MobHPSlider
@@ -68,7 +70,8 @@ namespace MobHPSlider
             if (npc.boss)
             {
                 if (!config.AffectBosses) return 1.0f;
-                if (Common.BossDataManager.BossHPOverrides.TryGetValue(npc.TypeName, out float overrideMult))
+                string npcDisplayName = Lang.GetNPCNameValue(npc.type);
+                if (Common.BossDataManager.BossHPOverrides.TryGetValue(npcDisplayName, out float overrideMult))
                     return overrideMult;
                 return config.BossHPPercent / 100f;
             }

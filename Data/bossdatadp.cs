@@ -1,6 +1,4 @@
 using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 using MobHPSlider.Common;
 
 namespace MobHPSlider
@@ -9,16 +7,6 @@ namespace MobHPSlider
     {
         public static void Initialize()
         {
-            for (int i = 1; i < NPCID.Count; i++)
-            {
-                string name = Lang.GetNPCNameValue(i);
-                
-                if (!string.IsNullOrEmpty(name))
-                {
-                    BossDataManager.RegisterBossOverride(name, 1.0f);
-                }
-            }
-
             TryRegister("King Slime", 2.0f);
             TryRegister("Eye of Cthulhu", 2.5f);
             TryRegister("Eater of Worlds", 1.5f);
