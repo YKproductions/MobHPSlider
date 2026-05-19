@@ -1,11 +1,11 @@
 Mob HP Slider gives you total control over enemy health across your world. No more being stuck with "just Expert" or "just Master" health values—tune it exactly how you like it.
 
 FEATURES:
-- 🎚️ Global Slider: Scale regular enemies from 10% to 500% health.
-- 👑 Boss Scaling: Separate slider for Bosses so you can tune them independently.
-- 🏘️ Town NPC Toggle: Optionally scale friendly NPCs (great for Old One's Army).
-- 🛡️ Min HP Floor: Safety setting to prevent mobs from being one-shot by scaling.
-- 🌐 Multiplayer Ready: Settings are server-side and sync to everyone.
+- Global Slider: Scale regular enemies from 10% to 500% health.
+- Boss Scaling: Separate slider for Bosses so you can tune them independently.
+- Town NPC Toggle: Optionally scale friendly NPCs (great for Old One's Army).
+- Min HP Floor: Safety setting to prevent mobs from being one-shot by scaling.
+- Multiplayer Ready: Settings are server-side and sync to everyone.
 
 How to Use:
 Simply open Mod Configuration from the main menu or in-game. Changes take effect on the next NPC spawn.
