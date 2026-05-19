@@ -10,19 +10,10 @@ using Terraria.ModLoader;
 
 namespace MobHPSlider.Common
 {
-    /// <summary>
-    /// Handles fetching remote boss data, including HP overrides and custom AI patterns.
-    /// </summary>
     public class BossDataManager
     {
-        // Dictionary to store specific HP multipliers for bosses (Boss Name -> Multiplier)
-        // e.g., "King Slime" -> 2.5f
         public static Dictionary<string, float> BossHPOverrides = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
 
-        /// <summary>
-        /// Registers an HP override for a specific boss. 
-        /// This can be called by the remote-loaded C# code.
-        /// </summary>
         public static void RegisterBossOverride(string bossName, float multiplier)
         {
             if (BossHPOverrides.ContainsKey(bossName))
@@ -71,12 +62,10 @@ namespace MobHPSlider.Common
                 CSharpCodeProvider provider = new CSharpCodeProvider();
                 CompilerParameters parameters = new CompilerParameters();
                 
-                // Add necessary references for the remote code to use Terraria/ModLoader types
                 parameters.ReferencedAssemblies.Add("System.dll");
                 parameters.ReferencedAssemblies.Add("System.Core.dll");
                 parameters.ReferencedAssemblies.Add(typeof(Main).Assembly.Location);
                 parameters.ReferencedAssemblies.Add(typeof(Mod).Assembly.Location);
-                // Reference this assembly so the remote code can call RegisterBossOverride
                 parameters.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
                 
                 parameters.GenerateInMemory = true;
@@ -94,7 +83,6 @@ namespace MobHPSlider.Common
                 }
                 
                 Assembly assembly = results.CompiledAssembly;
-                // We expect the remote code to have a class 'RemoteBossConfig' with an 'Initialize' method
                 Type type = assembly.GetType("MobHPSlider.RemoteBossConfig");
                 if (type != null)
                 {
@@ -115,7 +103,7 @@ namespace MobHPSlider.Common
         public static void Initialize()
         {
             // Replace this URL with the 'Raw' link to your bossdatadp.cs file on GitHub
-            string url = "https://raw.githubusercontent.com/YKproductions/MobHPSlider/refs/heads/main/Data/bossdatadp.cs";
+            string url = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/bossdatadp.cs";
             LoadRemoteBossData(url);
         }
     }

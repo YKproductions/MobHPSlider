@@ -5,7 +5,6 @@ namespace MobHPSlider
 {
     public class MobHPGlobalNPC : GlobalNPC
     {
-        // We make this instance-based so every NPC tracks its own original stats
         public override bool InstancePerEntity => true;
 
         public int OriginalLifeMax = -1;
@@ -13,19 +12,16 @@ namespace MobHPSlider
 
         public override void SetDefaults(NPC npc)
         {
-            // Initial scaling when the NPC spawns
             ApplyScaling(npc);
         }
 
         public override void PostAI(NPC npc)
         {
-            // Real-time check: If the config or server data changed, update the NPC immediately
             var config = MobHPConfig.Instance;
             if (config == null) return;
 
             float currentMult = GetTargetMultiplier(npc, config);
 
-            // If the multiplier has changed while the boss is alive
             if (currentMult != LastMultiplier)
             {
                 UpdateLifeScale(npc, currentMult);
@@ -37,7 +33,6 @@ namespace MobHPSlider
             var config = MobHPConfig.Instance;
             if (config == null) return;
 
-            // Capture the real base life max before we touch it
             if (OriginalLifeMax == -1)
                 OriginalLifeMax = npc.lifeMax;
 
@@ -55,7 +50,6 @@ namespace MobHPSlider
         {
             var config = MobHPConfig.Instance;
             
-            // Calculate health percentage so we can preserve it
             float healthPercent = (float)npc.life / npc.lifeMax;
 
             int newMax = (int)(OriginalLifeMax * newMultiplier);
@@ -63,7 +57,6 @@ namespace MobHPSlider
 
             npc.lifeMax = newMax;
             
-            // Re-apply the health percentage to the new max (prevents instant healing/death)
             npc.life = (int)(newMax * healthPercent);
             if (npc.life < 1 && healthPercent > 0) npc.life = 1;
 

@@ -9,7 +9,6 @@ namespace MobHPSlider
 
         public override ConfigScope Mode => ConfigScope.ServerSide;
 
-        // ── HP Multipliers ────────────────────────────────────────────────────
 
         [Header("HP_Multipliers")]
 
@@ -34,7 +33,6 @@ namespace MobHPSlider
         [Increment(5)]
         public int BossHPPercent { get; set; }
 
-        // ── Which Mobs Are Affected ───────────────────────────────────────────
 
         [Header("Affected_Mobs")]
 
@@ -49,7 +47,6 @@ namespace MobHPSlider
         [DefaultValue(false)]
         public bool AffectTownNPCs { get; set; }
 
-        // ── Safety Options ────────────────────────────────────────────────────
 
         [Header("Safety")]
 

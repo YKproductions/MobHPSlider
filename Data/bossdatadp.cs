@@ -9,25 +9,15 @@ namespace MobHPSlider
     {
         public static void Initialize()
         {
-            // --- AUTOMATIC VANILLA SCAN ---
-            // This loop scans every single vanilla mob in the game and registers it.
-            // This ensures every vanilla mob is "known" to the BossDataManager.
             for (int i = 1; i < NPCID.Count; i++)
             {
-                // Get the localized name of the vanilla NPC
                 string name = Lang.GetNPCNameValue(i);
                 
-                // Only register if it's a valid name
                 if (!string.IsNullOrEmpty(name))
                 {
-                    // Default to 1.0f (no change) so they can be overridden later
                     BossDataManager.RegisterBossOverride(name, 1.0f);
                 }
             }
-
-            // --- SPECIFIC OVERRIDES ---
-            // Add your specific HP multipliers below. 
-            // These will overwrite the default 1.0f set by the scan above.
 
             TryRegister("King Slime", 2.0f);
             TryRegister("Eye of Cthulhu", 2.5f);
@@ -37,7 +27,6 @@ namespace MobHPSlider
             TryRegister("Skeletron", 2.2f);
             TryRegister("Wall of Flesh", 3.0f);
             
-            // Hardmode Bosses
             TryRegister("Queen Slime", 2.5f);
             TryRegister("The Destroyer", 2.0f);
             TryRegister("Retinazer", 2.0f);
@@ -53,7 +42,6 @@ namespace MobHPSlider
 
         private static void TryRegister(string bossName, float multiplier)
         {
-            // Register the override directly. BossDataManager will handle the dictionary update.
             BossDataManager.RegisterBossOverride(bossName, multiplier);
         }
     }

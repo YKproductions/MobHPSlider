@@ -4,12 +4,11 @@
 
 	<PropertyGroup>
 		<AssemblyName>MobHPSlider</AssemblyName>
-		<TargetFramework>net6.0</TargetFramework>
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- Microsoft.CSharp is required for CSharpCodeProvider and dynamic keyword -->
+
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 
