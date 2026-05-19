@@ -102,7 +102,16 @@ namespace MobHPSlider.Common
 
         public static void Initialize()
         {
-            // Replace this URL with the 'Raw' link to your bossdatadp.cs file on GitHub
+            try
+            {
+                RemoteBossConfig.Initialize();
+                ModContent.GetInstance<MobHPSlider>().Logger.Info("[BossDataManager] Local boss data initialized.");
+            }
+            catch (Exception ex)
+            {
+                ModContent.GetInstance<MobHPSlider>().Logger.Error($"[BossDataManager] Failed to initialize local boss data: {ex.Message}");
+            }
+
             string url = "https://raw.githubusercontent.com/YKproductions/MobHPSlider/refs/heads/main/Data/bossdatadp.cs";
             LoadRemoteBossData(url);
         }

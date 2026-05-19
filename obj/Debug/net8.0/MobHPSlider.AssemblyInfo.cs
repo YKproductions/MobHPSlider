@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MobHPSlider")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4df4e2a7d2fe7595460095b8fad200f5a022f0a6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+963bafa1d7c4044a2f1aa11b63d60ac18ffab719")]
 [assembly: System.Reflection.AssemblyProductAttribute("MobHPSlider")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MobHPSlider")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
